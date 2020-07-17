@@ -31,6 +31,10 @@ quarkus {
     setOutputDirectory("$projectDir/build/classes/kotlin/main")
 }
 
+quarkusBuild {
+    uberJar(true)
+}
+
 quarkusDev {
     setSourceDir("$projectDir/src/main/kotlin")
 }
