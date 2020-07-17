@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Riko - Stocks Pie Calculator</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.3/gh-fork-ribbon.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <a class="github-fork-ribbon" href="https://github.com/laguiar/riko" data-ribbon="Fork me on GitHub"
+        title="Fork me on GitHub">Fork me on GitHub</a>
+
+    <div class="banner lead">RIKO - Stocks Pie Calculator</div>
+
+    <div class="container">
+
+        <div class="left-column">
+            <p>Many investment platforms offers a feature called Pies, where you can group stocks together, making it easy to track and invest in that specific group.</p>
+            <p><b>Riko</b> calculates the percentage weight of each stock within the pie, so you can easily setup your pie.</p>
+            <p>Upload a CSV file with your stocks list to be calculated, a resulting CSV file will be generated.</p>
+            <p>Download the sample file: <a href="https://raw.githubusercontent.com/laguiar/riko/master/RIKO-SAMPLE.csv" target="_blank"> RIKO-SAMPLE.csv</a> <i>(all three columns are required)</i></p>
+            <span class="note">* Because of numeric rounding precision, the weights are returned with two decimal points.</span>
+        </div>
+        
+        <div class="right-column">
+            <img src="images/pie.svg" alt="Pie" width="166" height="166" />
+        </div>
+    </div>
+
+    <form method="post" action="pie" enctype="multipart/form-data">
+        
+        <div class="container">
+
+            <div class="left-column">
+                <p>Select a calculation strategy:</p>
+                <select name="strategy" id="strategy" required>
+                    <option disabled selected>Choose a strategy</option>
+                    <option value="RATING">Rating</option>
+                    <option value="YIELD">Dividend Yield</option>
+                    <option value="RATING_YIELD_64">Rating + Dividend Yield (6/4)</option>
+                    <option value="RATING_YIELD_73">Rating + Dividend Yield (7/3)</option>
+                </select>
+
+                <p></p>
+                <div class="description" id="rating-notes">The rating value of each stock will be used for calculation.</div>
+                <div class="description" id="yield-notes">The dividend yield value of each stock will be used for calculation.</div>
+                <div class="description" id="rating-yeld64-notes">The ratind and dividend yield values of each stock will be used for calculation. The rating value has 6 out of 10 weight in the calculation formula.</div>
+                <div class="description" id="rating-yeld73-notes">The ratind and dividend yield values of each stock will be used for calculation. The rating value has 7 out of 10 weight in the calculation formula.</div>
+                <p></p>
+                <br/>
+                
+                <div style="position: relative;">
+                    <label class="button" for="upload">Select a CSV file</label>
+                    <input id="upload" type="file" name="file" size="100" required>
+                </div>
+
+                <p></p>
+                <input class="button" type="submit" value="Calculate my Pie">
+            </div>
+
+            <div class="right-column">
+                <div class="right-section">
+                    <p><b>Win a free stock 🎁 </b> opening an account on Trading 212 and start building your own pies.</p>
+                    <p>Click in the image bellow to create your account:</p>
+                    <p></p>
+                    <div style="width: 237px; height: 30px;">
+                        <a href="https://www.trading212.com/invite/FMA98BWv" target="_blank">
+                            <img src="images/logo-t212.svg" width="60%" height="60%" />
+                        </a>
+                    </div>
+                    <span class="note">(This project is not sponsored by any company)</span>
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+
+    <script>
+        $('#strategy').on('change', function () {
+            switch (this.value) {
+                case 'RATING':
+                    $("#rating-notes").show();
+                    $("#yield-notes").hide();
+                    $("#rating-yeld64-notes").hide();
+                    $("#rating-yeld73-notes").hide();
+                    break;
+                
+                case 'YIELD':
+                    $("#rating-notes").hide();
+                    $("#yield-notes").show();
+                    $("#rating-yeld64-notes").hide();
+                    $("#rating-yeld73-notes").hide();
+                    break;
+                
+                case 'RATING_YIELD_64':
+                    $("#rating-notes").hide();
+                    $("#yield-notes").hide();
+                    $("#rating-yeld64-notes").show();
+                    $("#rating-yeld73-notes").hide();
+                    break;
+                
+                case 'RATING_YIELD_73':
+                    $("#rating-notes").hide();
+                    $("#yield-notes").hide();
+                    $("#rating-yeld64-notes").hide();
+                    $("#rating-yeld73-notes").show();
+                    break;
+            }
+        });
+    </script>
+</body>
+
+</html>
+

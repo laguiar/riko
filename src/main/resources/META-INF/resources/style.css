@@ -1,0 +1,137 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem
+}
+
+h3 {
+    font-size: 1.75rem
+}
+
+h4 {
+    font-size: 1.5rem
+}
+
+h5 {
+    font-size: 1.25rem
+}
+
+h6 {
+    font-size: 1rem
+}
+
+.lead {
+    font-weight: 500;
+    font-size: 2rem;
+}
+
+.banner {
+    font-size: 2.7rem;
+    margin: 0;
+    padding: 2rem 1rem;
+    background-color: #d4713a;
+    color: white;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+code {
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 87.5%;
+    color: #e83e8c;
+    word-break: break-word;
+}
+
+input[type="file"] {
+    position: absolute;
+    z-index: -1;
+    top: 10px;
+    left: 20px;
+    font-size: 14px;
+    color: #b8b8b8;
+}
+
+.button {
+    background-color: #6b2c09;
+    border: none;
+    color: white;
+    padding: 8px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.left-column {
+    padding: .75rem;
+    max-width: 70%;
+    min-width: 55%;
+}
+
+.right-column {
+    padding: .75rem;
+    max-width: 30%;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+li {
+    margin: 0.75rem;
+}
+
+.right-section {
+    margin-left: 1rem;
+    padding-left: 0.5rem;
+}
+
+.right-section h3 {
+    padding-top: 0;
+    font-weight: 200;
+}
+
+.right-section ul {
+    border-left: 0.3rem solid #00A1E2;
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.note {
+    font-style: italic;
+    font-size: 12px;
+}
+
+.description {
+    display: none;
+    color: gray;
+    background-color: white;
+    max-width: 70%;
+    position: relative;
+}
+
+
+@media screen and (max-width: 600px) {
+    .right-column,
+    .left-column {
+        width: 100%;
+    }
+}
