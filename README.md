@@ -1,3 +1,5 @@
+![Kotlin CI with Gradle](https://github.com/laguiar/riko/workflows/Kotlin%20CI%20with%20Gradle/badge.svg)
+
 # riko project
 
 This project is build using Kotlin and Quarkus Framework.
