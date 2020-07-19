@@ -7,7 +7,14 @@ data class Stock(
 )
 
 enum class Strategy {
-    YIELD, RATING, RATING_YIELD_64, RATING_YIELD_73
+    YIELD,
+    RATING,
+    RATING_YIELD_64,
+    RATING_YIELD_73,
+    RATING_YIELD_82,
+    YIELD_RATING_64,
+    YIELD_RATING_73,
+    YIELD_RATING_82
 }
 
 data class CalculationInput(

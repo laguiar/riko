@@ -4,116 +4,206 @@
 <head>
     <title>Riko - Stocks Pie Calculator</title>
     <meta charset="UTF-8">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.3/gh-fork-ribbon.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+    <meta content="" name="description">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="style.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.3/gh-fork-ribbon.min.css"
+          rel="stylesheet">
+    <script crossorigin="anonymous"
+            integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 </head>
 
 <body>
-    <a class="github-fork-ribbon" href="https://github.com/laguiar/riko" data-ribbon="Fork me on GitHub"
-        title="Fork me on GitHub">Fork me on GitHub</a>
+<a class="github-fork-ribbon" data-ribbon="Fork me on GitHub" href="https://github.com/laguiar/riko"
+   title="Fork me on GitHub">Fork me on GitHub</a>
 
-    <div class="banner lead">RIKO - Stocks Pie Calculator</div>
+<div class="banner lead">RIKO - Stocks Pie Calculator</div>
+
+<div class="container">
+
+    <div class="left-column">
+        <p>Many investment platforms offers a feature called Pies, where you can group stocks together, making it easy
+            to track and invest in that specific group.</p>
+        <p><b>Riko</b> calculates the percentage weight of each stock within the pie, so you can easily setup your pie.
+        </p>
+        <p>Upload a CSV file with your stocks list to be calculated, a resulting CSV file will be generated.</p>
+        <p>Download the sample file: <a href="https://raw.githubusercontent.com/laguiar/riko/master/RIKO-SAMPLE.csv"
+                                        target="_blank"> RIKO-SAMPLE.csv</a> <i>(all three columns are required)</i></p>
+        <span class="note">* Because of numeric rounding precision, the weights are returned with two decimal points.</span>
+    </div>
+
+    <div class="right-column">
+        <img alt="Pie" height="166" src="images/pie.svg" width="166"/>
+    </div>
+</div>
+
+<form action="pie" enctype="multipart/form-data" method="post">
 
     <div class="container">
 
         <div class="left-column">
-            <p>Many investment platforms offers a feature called Pies, where you can group stocks together, making it easy to track and invest in that specific group.</p>
-            <p><b>Riko</b> calculates the percentage weight of each stock within the pie, so you can easily setup your pie.</p>
-            <p>Upload a CSV file with your stocks list to be calculated, a resulting CSV file will be generated.</p>
-            <p>Download the sample file: <a href="https://raw.githubusercontent.com/laguiar/riko/master/RIKO-SAMPLE.csv" target="_blank"> RIKO-SAMPLE.csv</a> <i>(all three columns are required)</i></p>
-            <span class="note">* Because of numeric rounding precision, the weights are returned with two decimal points.</span>
+            <p>Select a calculation strategy:</p>
+            <select id="strategy" name="strategy" required>
+                <option disabled selected>Choose a strategy</option>
+                <option value="RATING">Rating</option>
+                <option value="YIELD">Dividend Yield</option>
+                <option value="RATING_YIELD_64">Rating + Dividend Yield (6/4)</option>
+                <option value="RATING_YIELD_73">Rating + Dividend Yield (7/3)</option>
+                <option value="RATING_YIELD_82">Rating + Dividend Yield (8/2)</option>
+                <option value="YIELD_RATING_64">Dividend Yield + Rating (6/4)</option>
+                <option value="YIELD_RATING_73">Dividend Yield + Rating (7/3)</option>
+                <option value="YIELD_RATING_82">Dividend Yield + Rating (8/2)</option>
+            </select>
+
+            <p></p>
+            <div class="description" id="rating-notes">The rating value of each stock will be used for calculation.
+            </div>
+            <div class="description" id="yield-notes">The dividend yield value of each stock will be used for
+                calculation.
+            </div>
+            <div class="description" id="rating-yield64-notes">The rating and dividend yield values will be used for
+                calculation.<br/> The <b>rating</b> value has 6 out of 10 weight in the calculation formula.
+            </div>
+            <div class="description" id="rating-yield73-notes">The rating and dividend yield values will be used for
+                calculation.<br/> The <b>rating</b> value has 7 out of 10 weight in the calculation formula.
+            </div>
+            <div class="description" id="rating-yield82-notes">The rating and dividend yield values will be used for
+                calculation.<br/> The <b>rating</b> value has 8 out of 10 weight in the calculation formula.
+            </div>
+            <div class="description" id="yield-rating64-notes">The dividend yield and rating values will be used for
+                calculation.<br/> The <b>yield</b> value has 6 out of 10 weight in the calculation formula.
+            </div>
+            <div class="description" id="yield-rating73-notes">The dividend yield and rating values will be used for
+                calculation.<br/> The <b>yield</b> value has 7 out of 10 weight in the calculation formula.
+            </div>
+            <div class="description" id="yield-rating82-notes">The dividend yield and rating values will be used for
+                calculation.<br/> The <b>yield</b> value has 8 out of 10 weight in the calculation formula.
+            </div>
+            <p></p>
+            <br/>
+
+            <div style="position: relative;">
+                <label class="button" for="upload">Select a CSV file</label>
+                <input id="upload" name="file" required size="100" type="file">
+            </div>
+
+            <p></p>
+            <input class="button" type="submit" value="Calculate my Pie">
         </div>
-        
+
         <div class="right-column">
-            <img src="images/pie.svg" alt="Pie" width="166" height="166" />
+            <div class="right-section">
+                <p><b>Win a free stock 🎁 </b> opening an account on Trading 212 and start investing in your own pies.
+                </p>
+                <p>Click in the image bellow to create your account:</p>
+                <p></p>
+                <div style="width: 237px; height: 30px;">
+                    <a href="https://www.trading212.com/invite/FMA98BWv" target="_blank">
+                        <img alt="Open an account on Trading 212" height="60%" src="images/logo-t212.svg" width="60%"/>
+                    </a>
+                </div>
+                <span class="note">(This project is not sponsored by any company)</span>
+            </div>
         </div>
+
     </div>
 
-    <form method="post" action="pie" enctype="multipart/form-data">
-        
-        <div class="container">
+</form>
 
-            <div class="left-column">
-                <p>Select a calculation strategy:</p>
-                <select name="strategy" id="strategy" required>
-                    <option disabled selected>Choose a strategy</option>
-                    <option value="RATING">Rating</option>
-                    <option value="YIELD">Dividend Yield</option>
-                    <option value="RATING_YIELD_64">Rating + Dividend Yield (6/4)</option>
-                    <option value="RATING_YIELD_73">Rating + Dividend Yield (7/3)</option>
-                </select>
-
-                <p></p>
-                <div class="description" id="rating-notes">The rating value of each stock will be used for calculation.</div>
-                <div class="description" id="yield-notes">The dividend yield value of each stock will be used for calculation.</div>
-                <div class="description" id="rating-yeld64-notes">The ratind and dividend yield values of each stock will be used for calculation. The rating value has 6 out of 10 weight in the calculation formula.</div>
-                <div class="description" id="rating-yeld73-notes">The ratind and dividend yield values of each stock will be used for calculation. The rating value has 7 out of 10 weight in the calculation formula.</div>
-                <p></p>
-                <br/>
-                
-                <div style="position: relative;">
-                    <label class="button" for="upload">Select a CSV file</label>
-                    <input id="upload" type="file" name="file" size="100" required>
-                </div>
-
-                <p></p>
-                <input class="button" type="submit" value="Calculate my Pie">
-            </div>
-
-            <div class="right-column">
-                <div class="right-section">
-                    <p><b>Win a free stock 🎁 </b> opening an account on Trading 212 and start building your own pies.</p>
-                    <p>Click in the image bellow to create your account:</p>
-                    <p></p>
-                    <div style="width: 237px; height: 30px;">
-                        <a href="https://www.trading212.com/invite/FMA98BWv" target="_blank">
-                            <img src="images/logo-t212.svg" width="60%" height="60%" />
-                        </a>
-                    </div>
-                    <span class="note">(This project is not sponsored by any company)</span>
-                </div>
-            </div>
-
-        </div>
-
-    </form>
-
-    <script>
+<script>
         $('#strategy').on('change', function () {
             switch (this.value) {
                 case 'RATING':
                     $("#rating-notes").show();
                     $("#yield-notes").hide();
-                    $("#rating-yeld64-notes").hide();
-                    $("#rating-yeld73-notes").hide();
+                    $("#rating-yield64-notes").hide();
+                    $("#rating-yield73-notes").hide();
+                    $("#rating-yield82-notes").hide();
+                    $("#yield-rating64-notes").hide();
+                    $("#yield-rating73-notes").hide();
+                    $("#yield-rating82-notes").hide();
                     break;
-                
+
                 case 'YIELD':
                     $("#rating-notes").hide();
                     $("#yield-notes").show();
-                    $("#rating-yeld64-notes").hide();
-                    $("#rating-yeld73-notes").hide();
+                    $("#rating-yield64-notes").hide();
+                    $("#rating-yield73-notes").hide();
+                    $("#rating-yield82-notes").hide();
+                    $("#yield-rating64-notes").hide();
+                    $("#yield-rating73-notes").hide();
+                    $("#yield-rating82-notes").hide();
                     break;
-                
+
                 case 'RATING_YIELD_64':
                     $("#rating-notes").hide();
                     $("#yield-notes").hide();
-                    $("#rating-yeld64-notes").show();
-                    $("#rating-yeld73-notes").hide();
+                    $("#rating-yield64-notes").show();
+                    $("#rating-yield73-notes").hide();
+                    $("#rating-yield82-notes").hide();
+                    $("#yield-rating64-notes").hide();
+                    $("#yield-rating73-notes").hide();
+                    $("#yield-rating82-notes").hide();
                     break;
-                
+
                 case 'RATING_YIELD_73':
                     $("#rating-notes").hide();
                     $("#yield-notes").hide();
-                    $("#rating-yeld64-notes").hide();
-                    $("#rating-yeld73-notes").show();
+                    $("#rating-yield64-notes").hide();
+                    $("#rating-yield73-notes").show();
+                    $("#rating-yield82-notes").hide();
+                    $("#yield-rating64-notes").hide();
+                    $("#yield-rating73-notes").hide();
+                    $("#yield-rating82-notes").hide();
+                    break;
+
+                case 'RATING_YIELD_82':
+                    $("#rating-notes").hide();
+                    $("#yield-notes").hide();
+                    $("#rating-yield64-notes").hide();
+                    $("#rating-yield73-notes").hide();
+                    $("#rating-yield82-notes").show();
+                    $("#yield-rating64-notes").hide();
+                    $("#yield-rating73-notes").hide();
+                    $("#yield-rating82-notes").hide();
+                    break;
+
+                case 'YIELD_RATING_64':
+                    $("#rating-notes").hide();
+                    $("#yield-notes").hide();
+                    $("#rating-yield64-notes").hide();
+                    $("#rating-yield73-notes").hide();
+                    $("#rating-yield82-notes").hide();
+                    $("#yield-rating64-notes").show();
+                    $("#yield-rating73-notes").hide();
+                    $("#yield-rating82-notes").hide();
+                    break;
+
+                case 'YIELD_RATING_73':
+                    $("#rating-notes").hide();
+                    $("#yield-notes").hide();
+                    $("#rating-yield64-notes").hide();
+                    $("#rating-yield73-notes").hide();
+                    $("#rating-yield82-notes").hide();
+                    $("#yield-rating64-notes").hide();
+                    $("#yield-rating73-notes").show();
+                    $("#yield-rating82-notes").hide();
+                    break;
+
+                case 'YIELD_RATING_82':
+                    $("#rating-notes").hide();
+                    $("#yield-notes").hide();
+                    $("#rating-yield64-notes").hide();
+                    $("#rating-yield73-notes").hide();
+                    $("#rating-yield82-notes").hide();
+                    $("#yield-rating64-notes").hide();
+                    $("#yield-rating73-notes").hide();
+                    $("#yield-rating82-notes").show();
                     break;
             }
         });
-    </script>
+
+</script>
 </body>
 
 </html>

@@ -51,16 +51,18 @@ internal class CalculatorTest {
 
     @Test
     fun `Calculate RATING AND YIELD strategy`() {
-        val stocks = setOf(
-            Stock(ticker = "AAA", rating = 5, dividendYield = 3.0),
-            Stock(ticker = "BBB", rating = 4, dividendYield = 5.0),
-            Stock(ticker = "CCC", rating = 3, dividendYield = 4.0),
-            Stock(ticker = "DDD", rating = 5, dividendYield = 1.0)
-        )
+        val rating64 = calculatePie(CalculationInput(Strategy.RATING_YIELD_64, stocks))
+        val rating73 = calculatePie(CalculationInput(Strategy.RATING_YIELD_73, stocks))
+        val rating82 = calculatePie(CalculationInput(Strategy.RATING_YIELD_82, stocks))
+        val yield64 = calculatePie(CalculationInput(Strategy.YIELD_RATING_64, stocks))
+        val yield73 = calculatePie(CalculationInput(Strategy.YIELD_RATING_73, stocks))
+        val yield82 = calculatePie(CalculationInput(Strategy.YIELD_RATING_82, stocks))
 
-        val result = calculatePie(CalculationInput(Strategy.RATING_YIELD_64, stocks))
-        result.forEach(::println)
-
-        assertEquals(100.0, result.sumByDouble { it.weight }, 0.1)
+        assertEquals(100.0, rating64.sumByDouble { it.weight }, 0.1)
+        assertEquals(100.0, rating73.sumByDouble { it.weight }, 0.1)
+        assertEquals(100.0, rating82.sumByDouble { it.weight }, 0.1)
+        assertEquals(100.0, yield64.sumByDouble { it.weight }, 0.1)
+        assertEquals(100.0, yield73.sumByDouble { it.weight }, 0.1)
+        assertEquals(100.0, yield82.sumByDouble { it.weight }, 0.1)
     }
 }

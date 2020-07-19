@@ -10,7 +10,7 @@ fun calculatePie(input: CalculationInput): List<Slice> =
     when (input.strategy) {
         YIELD -> calculateByDividendYield(input.stocks)
         RATING -> calculateByRating(input.stocks)
-        RATING_YIELD_64, RATING_YIELD_73 -> calculateByRatingAndYield(input.stocks, input.strategy)
+        else -> calculateByRatingAndYield(input.stocks, input.strategy)
     }
 
 
@@ -28,7 +28,7 @@ private fun calculateByDividendYield(stocks: Set<Stock>): List<Slice> {
 private fun calculateByRating(stocks: Set<Stock>): List<Slice> {
     val sum = stocks.sumByDouble { it.rating.toDouble() }
 
-    return stocks.map {  stock ->
+    return stocks.map { stock ->
         val weight = stock.rating.div(sum) * 100
         buildSlice(stock.ticker, weight)
 
@@ -40,6 +40,10 @@ private fun calculateByRatingAndYield(stocks: Set<Stock>, strategy: Strategy): L
     val (ratingFactor, yieldFactor) = when (strategy) {
         RATING_YIELD_64 -> 0.60 to 0.40
         RATING_YIELD_73 -> 0.70 to 0.30
+        RATING_YIELD_82 -> 0.80 to 0.20
+        YIELD_RATING_64 -> 0.40 to 0.60
+        YIELD_RATING_73 -> 0.30 to 0.70
+        YIELD_RATING_82 -> 0.20 to 0.80
         else -> DEFAULT_WEIGHT_FACTOR
     }
 
