@@ -6,6 +6,10 @@ data class Stock(
     val dividendYield: Double
 )
 
+data class StockSummary(
+    val ticker: String
+)
+
 enum class Strategy {
     YIELD,
     RATING,
