@@ -15,4 +15,4 @@ You can try the project running on heroku:
 https://riko-calculator.herokuapp.com
 
 
-A more detailed README is coming soon.
+A detailed README will be added soon.
